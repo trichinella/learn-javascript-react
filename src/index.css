@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+.restaurant-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.restaurant {
+    border-bottom: rgba(2, 92, 17, 0.12) 1px solid;
+}
+
+.restaurant-header {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    gap: 10px;
+    padding: 0;
+}
+
+.menu-list > li {
+    border: rgba(2, 92, 17, 0.12) 1px solid;
+    padding: 10px;
+}
+
+.review-list {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    gap: 10px;
+    padding: 0;
+}
+
+.review-list > li {
+    border: rgba(2, 92, 17, 0.12) 1px solid;
+    padding: 10px;
+}
