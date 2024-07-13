@@ -1,44 +1,72 @@
-* {
-    box-sizing: border-box;
-}
-
-.restaurant-list {
+.container {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 15px;
 }
 
-.restaurant {
-    border-bottom: rgba(2, 92, 17, 0.12) 1px solid;
+header {
+    background: beige;
+    text-align: center;
+    padding: 10px !important;
 }
 
-.restaurant-header {
-    font-size: 24px;
+main {
+    flex-grow: 1;
+}
+
+footer {
+    background: cadetblue;
+    text-align: center;
+    padding: 10px !important;
+}
+
+.tab-header-panel {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 10px;
+}
+
+.tab {
+    border: rgba(2, 92, 17, 0.12) 1px solid;
+    padding: 10px;
+}
+
+.active-tab {
+    background-color: rgba(51, 51, 51, 0.35);
+    color: rgba(255, 255, 255);
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    gap: 10px;
+    padding: 0;
+}
+
+.menu > li {
+    border: rgba(2, 92, 17, 0.12) 1px solid;
+    padding: 10px;
+}
+
+.menu-item-count-block {
+    display: flex;
+    gap: 10px;
+}
+
+.tab-content {
+    border: rgba(2, 92, 17, 0.12) 1px solid;
+    padding: 10px;
+    margin: 10px;
+}
+
+.small-header {
     font-weight: bolder;
 }
 
-.menu-list {
+.restaurant {
     display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    gap: 10px;
-    padding: 0;
-}
-
-.menu-list > li {
-    border: rgba(2, 92, 17, 0.12) 1px solid;
-    padding: 10px;
-}
-
-.review-list {
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    gap: 10px;
-    padding: 0;
-}
-
-.review-list > li {
-    border: rgba(2, 92, 17, 0.12) 1px solid;
-    padding: 10px;
+    flex-direction: column;
+    gap: 15px;
 }
