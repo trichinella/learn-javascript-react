@@ -7,7 +7,7 @@ export const Menu = ({menu}) => {
             <h3 className={"small-header"}>Menu</h3>
             <ul className={"menu"}>
                 {menu.map(menuItem => {
-                    return <MenuItem key={menuItem.id} name={menuItem.name} />
+                    return <MenuItem key={menuItem.id} name={menuItem.name}/>
                 })}
             </ul>
         </div>
