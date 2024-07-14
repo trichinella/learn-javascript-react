@@ -1,5 +1,5 @@
 import React from "react";
-import {Review} from "../review/Review";
+import { Review } from "../review/Review";
 
 export const ReviewList = ({reviews}) => {
     return (

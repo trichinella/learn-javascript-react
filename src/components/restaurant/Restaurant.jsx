@@ -1,6 +1,6 @@
 import React from "react";
-import {Menu} from "../menu/Menu";
-import {ReviewList} from "../reviewList/ReviewList";
+import { Menu } from "../menu/Menu";
+import { ReviewList } from "../reviewList/ReviewList";
 
 export const Restaurant = ({restaurant}) => {
     //если нет меню - то такой ресторан не нужен

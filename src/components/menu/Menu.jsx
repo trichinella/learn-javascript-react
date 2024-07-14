@@ -1,5 +1,5 @@
 import React from "react";
-import {MenuItem} from "../menuItem/MenuItem.jsx";
+import { MenuItem } from "../menuItem/MenuItem.jsx";
 
 export const Menu = ({menu}) => {
     return (

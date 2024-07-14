@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Tab} from "./Tab";
+import React, { useState } from "react";
+import { Tab } from "./Tab";
 
 export const TabList = ({elements}) => {
     if (elements.length === 0) {

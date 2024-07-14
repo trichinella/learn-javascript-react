@@ -26,8 +26,8 @@ export const Counter = ({count, setCount, min, max}) => {
     };
 
     return (<div className={"menu-item-count-block"}>
-        <input type={"button"} value={"-"} onClick={decrement} disabled={!isCanBeLower()}/>
+        <button onClick={decrement} disabled={!isCanBeLower()}>-</button>
         <div>{count}</div>
-        <input type={"button"} value={"+"} onClick={increment} disabled={!isCanBeHigher()}/>
+        <button onClick={increment} disabled={!isCanBeHigher()}>+</button>
     </div>)
 }

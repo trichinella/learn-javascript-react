@@ -1,10 +1,10 @@
 export const Tab = ({label, onClick, isActive, id}) => {
-    return <input
+    return <button
         className={'tab' + (isActive(id) ? ' active-tab' : '')}
-        type={"button"}
-        value={label}
         onClick={() => {
             onClick(id);
         }}
-    />
+    >
+        {label}
+    </button>
 }

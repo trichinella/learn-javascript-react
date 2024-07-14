@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Counter} from "../counter/Counter";
+import React, { useState } from "react";
+import { Counter } from "../counter/Counter";
 
 export const MenuItem = ({name}) => {
     const [count, setCount] = useState(0);
