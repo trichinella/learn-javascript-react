@@ -1,7 +1,7 @@
-import React from "react";
-import { MenuItem } from "../menuItem/MenuItem.jsx";
+import MenuItem from "../menuItem/MenuItem.jsx";
+import PropTypes from "prop-types";
 
-export const Menu = ({menu}) => {
+const Menu = ({menu}) => {
     return (
         <div>
             <h3 className={"small-header"}>Menu</h3>
@@ -13,3 +13,8 @@ export const Menu = ({menu}) => {
         </div>
     )
 }
+
+Menu.propTypes = {
+    menu: PropTypes.array,
+}
+export default Menu;

@@ -1,6 +1,6 @@
-import React from "react";
+import PropTypes from "prop-types";
 
-export const Counter = ({count, setCount, min, max}) => {
+const Counter = ({count, setCount, min, max}) => {
     const isCanBeLower = () => {
         return (typeof min === 'undefined') || count > min;
     };
@@ -25,9 +25,20 @@ export const Counter = ({count, setCount, min, max}) => {
         setCount((prevState) => prevState + 1)
     };
 
-    return (<div className={"menu-item-count-block"}>
-        <button onClick={decrement} disabled={!isCanBeLower()}>-</button>
-        <div>{count}</div>
-        <button onClick={increment} disabled={!isCanBeHigher()}>+</button>
-    </div>)
+    return (
+        <div className={"menu-item-count-block"}>
+            <button onClick={decrement} disabled={!isCanBeLower()}>-</button>
+            <div>{count}</div>
+            <button onClick={increment} disabled={!isCanBeHigher()}>+</button>
+        </div>
+    )
 }
+
+Counter.propTypes = {
+    count: PropTypes.number,
+    setCount: PropTypes.func,
+    min: PropTypes.number,
+    max: PropTypes.number,
+}
+
+export default Counter;

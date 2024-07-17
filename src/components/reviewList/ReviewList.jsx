@@ -1,7 +1,7 @@
-import React from "react";
-import { Review } from "../review/Review";
+import Review from "../review/Review";
+import PropTypes from "prop-types";
 
-export const ReviewList = ({reviews}) => {
+const ReviewList = ({reviews}) => {
     return (
         <div>
             <h3 className={"small-header"}>Reviews</h3>
@@ -13,3 +13,8 @@ export const ReviewList = ({reviews}) => {
         </div>
     )
 }
+
+ReviewList.propTypes = {
+    reviews: PropTypes.array,
+}
+export default ReviewList;
