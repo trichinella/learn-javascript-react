@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Counter from "../counter/Counter";
 import PropTypes from "prop-types";
+import CounterContainer from "../counter/CounterContainer.jsx";
 
 const MenuItem = ({name}) => {
     const [count, setCount] = useState(0);
@@ -8,7 +8,7 @@ const MenuItem = ({name}) => {
     return (
         <li>
             <div>{name}</div>
-            <Counter count={count} setCount={setCount} min={0} max={5}/>
+            <CounterContainer count={count} setCount={setCount} min={0} max={5}/>
         </li>
     )
 }

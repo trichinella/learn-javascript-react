@@ -15,6 +15,6 @@ Tab.propTypes = {
     label: PropTypes.string,
     onClick: PropTypes.func,
     isActive: PropTypes.func,
-    id: PropTypes.number,
+    id: PropTypes.string,
 }
 export default Tab;

@@ -3,6 +3,7 @@ import Restaurant from "./restaurant/Restaurant";
 import { Layout } from "./layout/Layout";
 import 'reset-css';
 import TabList from "./tabList/TabList.jsx";
+import ScrollProgressBar from "./scrollProgressBar/ScrollProgressBar.jsx";
 
 export const App = () => {
     return (
@@ -16,6 +17,7 @@ export const App = () => {
                     };
                 })
             }/>
+            <ScrollProgressBar/>
         </Layout>
     )
 }
