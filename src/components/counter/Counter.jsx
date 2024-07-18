@@ -9,20 +9,24 @@ const Counter = ({count, decrement, increment, min, max}) => {
         return (typeof max === 'undefined') || count < max;
     };
 
+    const tryDecrement = () => {
+        if (isCanBeLower()) {
+            decrement()
+        }
+    };
+
+    const tryIncrement = () => {
+        if (isCanBeHigher()) {
+            increment()
+        }
+    };
+
     return (
         <div className={"menu-item-count-block"}>
-            <button type={"button"} onClick={() => {
-                if (isCanBeLower()) {
-                    decrement()
-                }
-            }} disabled={!isCanBeLower()}>-
+            <button type={"button"} onClick={tryDecrement} disabled={!isCanBeLower()}>-
             </button>
             <div>{count}</div>
-            <button type={"button"} onClick={() => {
-                if (isCanBeHigher()) {
-                    increment()
-                }
-            }} disabled={!isCanBeHigher()}>+
+            <button type={"button"} onClick={tryIncrement} disabled={!isCanBeHigher()}>+
             </button>
         </div>
     )

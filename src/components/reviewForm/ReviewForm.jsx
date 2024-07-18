@@ -7,7 +7,7 @@ const INITIAL_VALUES = () => {
     };
 };
 
-const producer = (state, action) => {
+const reducer = (state, action) => {
     switch (action.type) {
         case 'name':
             return {
@@ -33,7 +33,7 @@ const producer = (state, action) => {
 };
 
 export const ReviewForm = () => {
-    const [state, dispatch] = useReducer(producer, INITIAL_VALUES());
+    const [state, dispatch] = useReducer(reducer, INITIAL_VALUES());
 
     return (<form className={"review-form"}>
         <label>

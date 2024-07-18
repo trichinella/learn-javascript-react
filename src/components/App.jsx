@@ -8,6 +8,7 @@ import ScrollProgressBar from "./scrollProgressBar/ScrollProgressBar.jsx";
 export const App = () => {
     return (
         <Layout>
+            <ScrollProgressBar/>
             <TabList elements={
                 restaurants.map(restaurant => {
                     return {
@@ -17,7 +18,6 @@ export const App = () => {
                     };
                 })
             }/>
-            <ScrollProgressBar/>
         </Layout>
     )
 }

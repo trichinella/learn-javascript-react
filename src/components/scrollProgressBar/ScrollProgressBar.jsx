@@ -21,7 +21,7 @@ const ScrollProgressBar = () => {
         return () => {
             document.removeEventListener("scroll", onScroll);
         };
-    }, [percentage, onScroll]);
+    }, [onScroll]);
 
     return (
         <div className={"scroll-progress-bar"} style={{width: percentage + 'vw'}}></div>
