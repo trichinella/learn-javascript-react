@@ -1,4 +1,6 @@
-export const Tab = ({label, onClick, isActive, id}) => {
+import PropTypes from "prop-types";
+
+const Tab = ({label, onClick, isActive, id}) => {
     return <button
         className={'tab' + (isActive(id) ? ' active-tab' : '')}
         onClick={() => {
@@ -8,3 +10,11 @@ export const Tab = ({label, onClick, isActive, id}) => {
         {label}
     </button>
 }
+
+Tab.propTypes = {
+    label: PropTypes.string,
+    onClick: PropTypes.func,
+    isActive: PropTypes.func,
+    id: PropTypes.string,
+}
+export default Tab;

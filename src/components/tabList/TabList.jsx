@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { Tab } from "./Tab";
+import { useState } from "react";
+import Tab from "./Tab";
+import PropTypes from "prop-types";
 
-export const TabList = ({elements}) => {
+const TabList = ({elements}) => {
+    const [activeId, setActiveId] = useState(elements.length > 0 ? elements.find(element => element !== undefined).key : null);
+
     if (elements.length === 0) {
         return null;
     }
-
-    const [activeId, setActiveId] = useState(elements.find(element => element !== undefined).key);
 
     const isActive = (id) => {
         return id === activeId;
@@ -39,3 +40,8 @@ export const TabList = ({elements}) => {
         </>
     )
 }
+
+TabList.propTypes = {
+    elements: PropTypes.array,
+}
+export default TabList;
