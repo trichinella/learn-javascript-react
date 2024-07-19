@@ -1,19 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
+import { getScrollPercentage } from "../../helpers/scroll.js";
 
 const ScrollProgressBar = () => {
-    const getCurrentPercentage = useCallback(() => {
-        if (!document.body.scrollHeight || !window.scrollY) {
-            return 0;
-        }
-
-        return Math.min(Math.ceil(window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100), 100);
-    }, [])
-
-    const [percentage, setPercentage] = useState(getCurrentPercentage())
+    const [percentage, setPercentage] = useState(getScrollPercentage())
 
     const onScroll = useCallback(() => {
-        setPercentage(getCurrentPercentage());
-    }, [getCurrentPercentage]);
+        setPercentage(getScrollPercentage());
+    }, []);
 
     useEffect(() => {
         document.addEventListener("scroll", onScroll);
