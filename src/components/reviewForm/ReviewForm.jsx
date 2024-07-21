@@ -41,6 +41,7 @@ export const ReviewForm = () => {
         </label>
         <input
             type={"text"}
+            className={"form-input"}
             name={"name"}
             value={state.name}
             onChange={event => dispatch({type: 'name', payload: event.target.value})}
@@ -49,6 +50,7 @@ export const ReviewForm = () => {
             Text
         </label>
         <textarea
+            className={"form-input"}
             name={"text"}
             value={state.text}
             onChange={event => dispatch({type: 'text', payload: event.target.value})}
@@ -63,6 +65,6 @@ export const ReviewForm = () => {
             decrement={() => dispatch({type: 'decrementRating'})}
             increment={() => dispatch({type: 'incrementRating'})}
         />
-        <button onClick={() => dispatch({type: 'reset'})} type={'button'}>Save</button>
+        <button className={"button"} onClick={() => dispatch({type: 'reset'})} type={'button'}>Save</button>
     </form>)
 }

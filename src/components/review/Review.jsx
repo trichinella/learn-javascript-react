@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export const Review = ({text}) => {
     return (
-        <li>{text}</li>
+        <li className={'review'}>{text}</li>
     )
 }
 
