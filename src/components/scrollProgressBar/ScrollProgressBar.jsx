@@ -5,9 +5,9 @@ import { throttle } from "throttle-debounce";
 const ScrollProgressBar = () => {
     const [percentage, setPercentage] = useState(getScrollPercentage())
 
-    const onScroll = useCallback(throttle(40, () => {
+    const onScroll = useCallback(() => throttle(40, () => {
         setPercentage(getScrollPercentage());
-    }), []);
+    })(), []);
 
     useEffect(() => {
         document.addEventListener("scroll", onScroll);
