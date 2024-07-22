@@ -106,23 +106,3 @@ footer {
     padding: 0.5rem;
     border-radius: 5px;
 }
-
-.button {
-    border: rgba(2, 92, 17, 0.12) 1px solid;
-    padding: 0.5rem;
-    border-radius: 5px;
-}
-
-.button:hover {
-    cursor: pointer;
-    background-color: rgba(143, 166, 190, 0.47);
-}
-
-.button:active {
-    cursor: pointer;
-    background-color: rgba(143, 166, 190, 0.77);
-}
-
-.button.button-sm {
-    padding: 0.2rem 0.5rem;
-}

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Button from "../button/Button.jsx";
 
 const Counter = ({count, decrement, increment, min, max}) => {
     const isCanBeLower = () => {
@@ -23,11 +24,9 @@ const Counter = ({count, decrement, increment, min, max}) => {
 
     return (
         <div className={"menu-item-count-block"}>
-            <button className={"button button-sm"} type={"button"} onClick={tryDecrement} disabled={!isCanBeLower()}>-
-            </button>
+            <Button onClick={tryDecrement} disabled={!isCanBeLower()} size={"small"}>-</Button>
             <div>{count}</div>
-            <button className={"button button-sm"} type={"button"} onClick={tryIncrement} disabled={!isCanBeHigher()}>+
-            </button>
+            <Button onClick={tryIncrement} disabled={!isCanBeHigher()} size={"small"}>+</Button>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import Counter from "../counter/Counter.jsx";
 import styles from "./styles.module.css";
+import Button from "../button/Button.jsx";
 
 const INITIAL_VALUES = () => {
     return {
@@ -66,6 +67,6 @@ export const ReviewForm = () => {
             decrement={() => dispatch({type: 'decrementRating'})}
             increment={() => dispatch({type: 'incrementRating'})}
         />
-        <button className={"button"} onClick={() => dispatch({type: 'reset'})} type={'button'}>Save</button>
+        <Button onClick={() => dispatch({type: 'reset'})}>Save</Button>
     </form>)
 }
