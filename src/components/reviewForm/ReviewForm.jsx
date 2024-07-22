@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import Counter from "../counter/Counter.jsx";
+import styles from "./styles.module.css";
 
 const INITIAL_VALUES = () => {
     return {
@@ -36,7 +37,7 @@ export const ReviewForm = () => {
     const [state, dispatch] = useReducer(reducer, INITIAL_VALUES());
 
     return (<form className={"review-form"}>
-        <label>
+        <label className={styles['review-form-label']}>
             Name
         </label>
         <input
@@ -46,7 +47,7 @@ export const ReviewForm = () => {
             value={state.name}
             onChange={event => dispatch({type: 'name', payload: event.target.value})}
         />
-        <label>
+        <label className={styles['review-form-label']}>
             Text
         </label>
         <textarea
@@ -55,7 +56,7 @@ export const ReviewForm = () => {
             value={state.text}
             onChange={event => dispatch({type: 'text', payload: event.target.value})}
         />
-        <label>
+        <label className={styles['review-form-label']}>
             Rating
         </label>
         <Counter
