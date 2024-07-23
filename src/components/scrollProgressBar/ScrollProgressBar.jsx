@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getScrollPercentage } from "../../helpers/scroll.js";
+import { throttle } from "throttle-debounce";
 
 const ScrollProgressBar = () => {
     const [percentage, setPercentage] = useState(getScrollPercentage())
 
-    const onScroll = useCallback(() => {
+    const onScroll = useCallback(() => throttle(40, () => {
         setPercentage(getScrollPercentage());
-    }, []);
+    })(), []);
 
     useEffect(() => {
         document.addEventListener("scroll", onScroll);

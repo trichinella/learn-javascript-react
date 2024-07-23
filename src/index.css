@@ -5,7 +5,8 @@
 }
 
 header {
-    background: beige;
+    background: #0092aa;
+    color: rgb(255, 255, 255);
     text-align: center;
     padding: 10px !important;
 }
@@ -15,7 +16,8 @@ main {
 }
 
 footer {
-    background: cadetblue;
+    background: #0092aa;
+    color: rgb(255, 255, 255);
     text-align: center;
     padding: 10px !important;
 }
@@ -53,6 +55,7 @@ footer {
 .menu-item-count-block {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .tab-content {
@@ -63,6 +66,7 @@ footer {
 
 .small-header {
     font-weight: bolder;
+    margin-bottom: 1rem;
 }
 
 .restaurant {
@@ -73,7 +77,7 @@ footer {
 
 .scroll-progress-bar {
     height: 20px;
-    background-color: darkolivegreen;
+    background-color: rgba(142, 142, 142, 0.73);
     position: fixed;
     top: 0;
 }
@@ -85,4 +89,14 @@ footer {
     justify-content: start;
     column-gap: 10px;
     row-gap: 15px;
+    align-items: center;
+}
+
+.review {
+    border: rgba(2, 92, 17, 0.12) 1px solid;
+    padding: 1rem;
+}
+
+.review + .review {
+    margin-top: 1rem;
 }
