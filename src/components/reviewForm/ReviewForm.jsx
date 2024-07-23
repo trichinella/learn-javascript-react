@@ -38,26 +38,26 @@ export const ReviewForm = () => {
     const [state, dispatch] = useReducer(reducer, INITIAL_VALUES());
 
     return (<form className={"review-form"}>
-        <label className={styles['review-form-label']}>
+        <label className={styles.reviewFormLabel}>
             Name
         </label>
         <input
             type={"text"}
-            className={"form-input"}
+            className={styles.formInput}
             name={"name"}
             value={state.name}
             onChange={event => dispatch({type: 'name', payload: event.target.value})}
         />
-        <label className={styles['review-form-label']}>
+        <label className={styles.reviewFormLabel}>
             Text
         </label>
         <textarea
-            className={"form-input"}
+            className={styles.formInput}
             name={"text"}
             value={state.text}
             onChange={event => dispatch({type: 'text', payload: event.target.value})}
         />
-        <label className={styles['review-form-label']}>
+        <label className={styles.reviewFormLabel}>
             Rating
         </label>
         <Counter

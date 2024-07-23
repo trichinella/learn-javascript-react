@@ -3,8 +3,7 @@ import styles from "./styles.module.css";
 import classNames from 'classnames';
 
 const Button = ({children, onClick, disabled, size}) => {
-    const btnClass = classNames({
-        [styles.button]: true,
+    const btnClass = classNames(styles.button, {
         [styles['button-sm']]: size === 'small',
     });
 

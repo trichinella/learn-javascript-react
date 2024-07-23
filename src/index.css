@@ -100,9 +100,3 @@ footer {
 .review + .review {
     margin-top: 1rem;
 }
-
-.form-input {
-    border: rgba(2, 92, 17, 0.12) 1px solid;
-    padding: 0.5rem;
-    border-radius: 5px;
-}

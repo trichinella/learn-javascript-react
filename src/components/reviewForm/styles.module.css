@@ -1,3 +1,9 @@
-.review-form-label {
+.reviewFormLabel {
     margin-left: 10px;
+}
+
+.formInput {
+    border: rgba(2, 92, 17, 0.12) 1px solid;
+    padding: 0.5rem;
+    border-radius: 5px;
 }
