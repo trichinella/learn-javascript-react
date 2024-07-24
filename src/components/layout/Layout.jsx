@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
+import Header from "../header/Header.jsx";
+import Footer from "../footer/Footer.jsx";
 
 export const Layout = ({children}) => {
     return (
         <div className={"container"}>
-            <header>Very useful header</header>
+            <Header/>
             <main>{children}</main>
-            <footer>Very useful footer</footer>
+            <Footer/>
         </div>
     )
 }

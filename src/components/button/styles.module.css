@@ -6,14 +6,45 @@
 
 .button:hover {
     cursor: pointer;
-    background-color: rgba(143, 166, 190, 0.47);
+    background-color: rgb(174, 174, 174);
 }
 
 .button:active {
     cursor: pointer;
-    background-color: rgba(143, 166, 190, 0.77);
+    background-color: rgb(133, 133, 133);
+    color: white;
 }
 
 .button-sm {
     padding: 0.2rem 0.5rem;
+}
+
+.button-light {
+    background-color: rgb(234, 234, 234);
+}
+
+.button-dark {
+    background-color: rgb(14, 55, 103);
+    color: white;
+}
+
+.button-dark:hover {
+    background-color: rgb(38, 84, 138);
+}
+
+.button-dark:active {
+    background-color: rgba(35, 85, 136, 0.77);
+}
+
+.button-dark:disabled {
+    background-color: rgba(71, 70, 70, 0.93);
+}
+
+.button-active-light{
+    background-color: rgba(120, 117, 117, 0.93);
+    color: white;
+}
+
+.button-active-dark{
+    background-color: rgba(55, 132, 143, 0.93);
 }
