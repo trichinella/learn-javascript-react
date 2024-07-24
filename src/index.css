@@ -29,16 +29,6 @@ footer {
     margin: 10px;
 }
 
-.tab {
-    border: rgba(2, 92, 17, 0.12) 1px solid;
-    padding: 10px;
-}
-
-.active-tab {
-    background-color: rgba(51, 51, 51, 0.35);
-    color: rgba(255, 255, 255);
-}
-
 .menu {
     display: flex;
     flex-direction: row;

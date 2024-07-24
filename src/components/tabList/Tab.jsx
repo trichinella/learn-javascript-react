@@ -1,14 +1,15 @@
 import PropTypes from "prop-types";
+import Button from "../button/Button.jsx";
 
 const Tab = ({label, onClick, isActive, id}) => {
-    return <button
-        className={'tab' + (isActive(id) ? ' active-tab' : '')}
+    return <Button
+        active={isActive(id)}
         onClick={() => {
             onClick(id);
         }}
     >
         {label}
-    </button>
+    </Button>
 }
 
 Tab.propTypes = {

@@ -1,0 +1,9 @@
+.headerPanel {
+    display: flex;
+    gap: 10px;
+}
+
+.mainPanel {
+    flex-grow: 1;
+    text-align: left;
+}
