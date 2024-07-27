@@ -1,0 +1,8 @@
+.header {
+    background: rgb(150, 211, 236);
+    background: linear-gradient(90deg, rgba(150, 211, 236, 1) 0%, rgba(211, 239, 251, 1) 50%, rgba(150, 211, 236, 1) 100%);
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}

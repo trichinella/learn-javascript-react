@@ -1,29 +1,23 @@
-import { restaurants } from "../constants/mock.js";
-import Restaurant from "./restaurant/Restaurant";
 import { Layout } from "./layout/Layout";
 import 'reset-css';
-import TabList from "./tabList/TabList.jsx";
 import ScrollProgressBar from "./scrollProgressBar/ScrollProgressBar.jsx";
 import { ThemeProvider } from "./themeProvider/ThemeProvider.jsx";
 import { UserProvider } from "./userProvider/UserProvider.jsx";
+import { Provider } from "react-redux";
+import { store } from "../redux/store.js";
+import RestaurantList from "./restaurantList/RestaurantList.jsx";
 
 export const App = () => {
     return (
-        <ThemeProvider>
-            <UserProvider>
-                <Layout>
-                    <ScrollProgressBar/>
-                    <TabList elements={
-                        restaurants.map(restaurant => {
-                            return {
-                                key: restaurant.id,
-                                label: restaurant.name,
-                                children: <Restaurant key={restaurant.id} restaurant={restaurant}/>,
-                            };
-                        })
-                    }/>
-                </Layout>
-            </UserProvider>
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider>
+                <UserProvider>
+                    <Layout>
+                        <ScrollProgressBar/>
+                        <RestaurantList/>
+                    </Layout>
+                </UserProvider>
+            </ThemeProvider>
+        </Provider>
     )
 }

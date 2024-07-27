@@ -23,7 +23,7 @@ const Counter = ({count, decrement, increment, min, max}) => {
     };
 
     return (
-        <div className={"menu-item-count-block"}>
+        <div className={"dish-item-count-block"}>
             <Button onClick={tryDecrement} disabled={!isCanBeLower()} size={"small"}>-</Button>
             <div>{count}</div>
             <Button onClick={tryIncrement} disabled={!isCanBeHigher()} size={"small"}>+</Button>

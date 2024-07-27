@@ -1,0 +1,12 @@
+.dishList {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    gap: 10px;
+    padding: 0;
+}
+
+.dishList > li {
+    border: rgba(2, 92, 17, 0.12) 1px solid;
+    padding: 20px;
+}

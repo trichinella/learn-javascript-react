@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getScrollPercentage } from "../../helpers/scroll.js";
 import { throttle } from "throttle-debounce";
+import styles from "./styles.module.css";
 
 const ScrollProgressBar = () => {
     const [percentage, setPercentage] = useState(getScrollPercentage())
@@ -18,7 +19,7 @@ const ScrollProgressBar = () => {
     }, [onScroll]);
 
     return (
-        <div className={"scroll-progress-bar"} style={{width: percentage + 'vw'}}></div>
+        <div className={styles.scrollProgressBar} style={{width: percentage + 'vw'}}></div>
     );
 };
 
