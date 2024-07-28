@@ -37,7 +37,7 @@ const reducer = (state, action) => {
 export const ReviewForm = () => {
     const [state, dispatch] = useReducer(reducer, INITIAL_VALUES());
 
-    return (<form className={"review-form"}>
+    return (<form className={styles.reviewForm}>
         <label className={styles.reviewFormLabel}>
             Name
         </label>

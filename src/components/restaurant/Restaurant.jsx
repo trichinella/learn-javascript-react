@@ -15,7 +15,7 @@ const Restaurant = ({id}) => {
     }
 
     return (
-        <div className={"restaurant"}>
+        <div className={styles.restaurant}>
             <div className={styles.header}>{restaurant.name ?? 'Unnamed'}</div>
             <DishList dishIds={restaurant.menu}/>
             {restaurant?.reviews?.length > 0 && <ReviewList reviewIds={restaurant.reviews}/>}

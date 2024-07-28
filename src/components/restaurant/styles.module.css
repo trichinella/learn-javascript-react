@@ -6,3 +6,9 @@
     font-weight: bold;
     text-align: center;
 }
+
+.restaurant {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

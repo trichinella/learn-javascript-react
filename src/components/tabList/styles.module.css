@@ -1,0 +1,12 @@
+.tabHeaderPanel {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 10px;
+}
+
+.tabContent {
+    border: rgba(2, 92, 17, 0.12) 1px solid;
+    padding: 10px;
+    margin: 10px;
+}
