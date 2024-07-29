@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Button from "../button/Button.jsx";
+import styles from "./styles.module.css";
 
 const Counter = ({count, decrement, increment, min, max}) => {
     const isCanBeLower = () => {
@@ -23,7 +24,7 @@ const Counter = ({count, decrement, increment, min, max}) => {
     };
 
     return (
-        <div className={"menu-item-count-block"}>
+        <div className={styles.itemCountBlock}>
             <Button onClick={tryDecrement} disabled={!isCanBeLower()} size={"small"}>-</Button>
             <div>{count}</div>
             <Button onClick={tryIncrement} disabled={!isCanBeHigher()} size={"small"}>+</Button>

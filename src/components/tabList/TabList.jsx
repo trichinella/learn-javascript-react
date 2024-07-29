@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Tab from "./Tab";
 import PropTypes from "prop-types";
+import styles from "./styles.module.css";
 
 const TabList = ({elements}) => {
     const [activeId, setActiveId] = useState(elements.length > 0 ? elements.find(element => element !== undefined).key : null);
@@ -21,7 +22,7 @@ const TabList = ({elements}) => {
 
     return (
         <>
-            <div className={'tab-header-panel'}>
+            <div className={styles.tabHeaderPanel}>
                 {elements.map(element => {
                     return <Tab
                         key={'tab' + element.key}
@@ -34,7 +35,7 @@ const TabList = ({elements}) => {
             </div>
 
 
-            <div className={'tab-content'}>
+            <div className={styles.tabContent}>
                 {elements.find(element => element.key === activeId).children}
             </div>
         </>

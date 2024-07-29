@@ -13,7 +13,10 @@ const Tab = ({label, onClick, isActive, id}) => {
 }
 
 Tab.propTypes = {
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node,
+    ]),
     onClick: PropTypes.func,
     isActive: PropTypes.func,
     id: PropTypes.string,

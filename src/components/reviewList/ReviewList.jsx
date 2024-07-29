@@ -1,13 +1,14 @@
 import Review from "../review/Review";
 import PropTypes from "prop-types";
+import Caption from "../caption/Caption.jsx";
 
-const ReviewList = ({reviews}) => {
+const ReviewList = ({reviewIds}) => {
     return (
         <div>
-            <h3 className={"small-header"}>Reviews</h3>
+            <Caption>Reviews</Caption>
             <ul className={"review-list"}>
-                {reviews.map(review => {
-                    return <Review key={review.id} text={review.text}/>
+                {reviewIds.map(reviewId => {
+                    return <Review key={reviewId} id={reviewId}/>
                 })}
             </ul>
         </div>
@@ -15,6 +16,6 @@ const ReviewList = ({reviews}) => {
 }
 
 ReviewList.propTypes = {
-    reviews: PropTypes.array,
+    reviewIds: PropTypes.array,
 }
 export default ReviewList;

@@ -1,0 +1,12 @@
+.review {
+    padding: 1rem;
+}
+
+.review + .review {
+    margin-top: 1rem;
+    border-top: rgba(2, 92, 17, 0.12) 1px solid;
+}
+
+.user {
+    font-weight: bolder;
+}
