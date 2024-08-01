@@ -1,7 +1,7 @@
-.dishHeader{
+.dishHeader {
     font-weight: bolder;
 }
 
-.dishCounter {
-    margin-top: 1rem;
+.dish {
+    padding: 20px;
 }

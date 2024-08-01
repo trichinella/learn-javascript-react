@@ -1,0 +1,9 @@
+.beautyText {
+    font-size: 2rem;
+    padding: 10px;
+    text-align: justify;
+}
+
+.beautyText p {
+    text-indent: 3rem;
+}

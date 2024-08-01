@@ -1,29 +1,24 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import CounterContainer from "../counter/CounterContainer.jsx";
 import styles from "./styles.module.css";
 import { useUserContext } from "../userProvider/UserProvider.jsx";
 import { useSelector } from "react-redux";
-import { selectDishById } from "../../redux/dish/dishSlice.js";
+import { useParams } from "react-router-dom";
+import { selectDishById } from "../../redux/entities/dish/dishSlice.js";
+import DishCartSection from "../dishCartSection/DishCartSection.jsx";
 
-const Dish = ({id}) => {
-    const dish = useSelector(state => selectDishById(state, id));
+const Dish = () => {
+    const {dishId} = useParams();
+    const dish = useSelector(state => selectDishById(state, dishId));
 
-    const [count, setCount] = useState(0);
-    const {user} = useUserContext()
+    const {user} = useUserContext();
 
     return (
-        <li>
+        <div className={styles.dish}>
             <div className={styles.dishHeader}>{dish.name}</div>
             <div>Ingredients: {dish.ingredients.join(', ')}</div>
-            {user &&
-                <div className={styles.dishCounter}><CounterContainer count={count} setCount={setCount} min={0}
-                                                                      max={5}/></div>}
-        </li>
+            {user && <DishCartSection id={dishId} />}
+        </div>
     )
 }
 
-Dish.propTypes = {
-    id: PropTypes.string,
-}
+Dish.propTypes = {}
 export default Dish;

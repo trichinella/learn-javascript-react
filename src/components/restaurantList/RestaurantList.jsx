@@ -1,22 +1,26 @@
-import TabList from "../tabList/TabList.jsx";
 import { useSelector } from "react-redux";
-import { selectRestaurantIds } from "../../redux/restaurant/restaurantSlice.js";
 import RestaurantLabel from "../restaurant/RestaurantLabel.jsx";
-import Restaurant from "../restaurant/Restaurant.jsx";
+import { Outlet, useParams } from "react-router-dom";
+import ButtonGroup from "../buttonGroup/ButtonGroup.jsx";
+import { selectRestaurantIds } from "../../redux/entities/restaurant/restaurantSlice.js";
 
 const RestaurantList = () => {
     const ids = useSelector(selectRestaurantIds);
+    const {restaurantId} = useParams();
 
     return (
-        <TabList elements={
-            ids.map(id => {
-                return {
-                    key: id,
-                    label: <RestaurantLabel id={id}/>,
-                    children: <Restaurant key={id} id={id}/>,
-                };
-            })
-        }/>
+        <>
+            <ButtonGroup defaultId={restaurantId ?? null} elements={
+                ids.map(id => {
+                    return {
+                        key: id,
+                        label: <RestaurantLabel id={id}/>,
+                        href: '/restaurants/' + id,
+                    };
+                })
+            }/>
+            <Outlet/>
+        </>
     );
 };
 
