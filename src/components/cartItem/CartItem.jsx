@@ -6,9 +6,9 @@ const CartItem = ({dishId, amount}) => {
     const dish = useSelector(state => selectDishById(state, dishId)) || {};
 
     return (
-        <li>
+        <>
             {dish.name} - {amount}
-        </li>
+        </>
     );
 };
 

@@ -10,8 +10,8 @@ const Cart = () => {
         <div className={styles.cartContainer}>
             {items.length ? (
                 <ul>
-                    {items.map(({ itemId, amount }) => (
-                        <CartItem key={itemId} dishId={itemId} amount={amount} />
+                    {items.map(({itemId, amount}) => (
+                        <li key={itemId}><CartItem dishId={itemId} amount={amount}/></li>
                     ))}
                 </ul>
             ) : (
