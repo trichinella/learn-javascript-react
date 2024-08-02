@@ -9,7 +9,7 @@ const DishPreview = ({id}) => {
 
     return (
         <div className={styles.preview}>
-            <Link to={'/dish/' + dish.id}>{dish.name}</Link>
+            <Link to={`/dish/${dish.id}`}>{dish.name}</Link>
         </div>
     );
 };

@@ -8,9 +8,7 @@ const UserFlowSection = () => {
     }
 
     return (
-        <>
-            <Cart/>
-        </>
+        <Cart/>
     );
 };
 
