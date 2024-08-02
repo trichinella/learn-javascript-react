@@ -1,0 +1,5 @@
+.navBar {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+}

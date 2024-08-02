@@ -1,22 +1,24 @@
-import TabList from "../tabList/TabList.jsx";
 import { useSelector } from "react-redux";
-import { selectRestaurantIds } from "../../redux/restaurant/restaurantSlice.js";
 import RestaurantLabel from "../restaurant/RestaurantLabel.jsx";
-import Restaurant from "../restaurant/Restaurant.jsx";
+import { Outlet } from "react-router-dom";
+import { selectRestaurantIds } from "../../redux/entities/restaurant/restaurantSlice.js";
+import styles from "./styles.module.css";
+import ThemeNavLink from "../themeNavLink/ThemeNavLink.jsx";
 
 const RestaurantList = () => {
     const ids = useSelector(selectRestaurantIds);
 
     return (
-        <TabList elements={
-            ids.map(id => {
-                return {
-                    key: id,
-                    label: <RestaurantLabel id={id}/>,
-                    children: <Restaurant key={id} id={id}/>,
-                };
-            })
-        }/>
+        <>
+            <div className={styles.buttonRow}>
+                {ids.map(id => {
+                    return <ThemeNavLink to={'/restaurants/' + id} key={'button-' + id}>
+                        <RestaurantLabel id={id}/>
+                    </ThemeNavLink>
+                })}
+            </div>
+            <Outlet/>
+        </>
     );
 };
 

@@ -1,15 +1,20 @@
-import ReviewList from "../reviewList/ReviewList";
-import PropTypes from "prop-types";
-import { ReviewForm } from "../reviewForm/ReviewForm.jsx";
 import { useSelector } from "react-redux";
-import { selectRestaurantById } from "../../redux/restaurant/restaurantSlice.js";
-import DishList from "../dishList/DishList.jsx";
 import styles from "./styles.module.css";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { RestaurantPartList } from "./RestaurantPartList.js";
+import { selectRestaurantById } from "../../redux/entities/restaurant/restaurantSlice.js";
+import ThemeNavLink from "../themeNavLink/ThemeNavLink.jsx";
 
-const Restaurant = ({id}) => {
-    const restaurant = useSelector(state => selectRestaurantById(state, id)) || {};
+const Restaurant = () => {
+    const {restaurantId} = useParams();
+    const restaurant = useSelector(state => selectRestaurantById(state, restaurantId)) || {};
+    const navigate = useNavigate();
 
-    //если нет меню - то такой ресторан не нужен
+    useEffect(() => {
+        navigate("menu", { replace: true });
+    }, [navigate, restaurantId]);
+
     if (!restaurant?.menu?.length) {
         return null;
     }
@@ -17,14 +22,18 @@ const Restaurant = ({id}) => {
     return (
         <div className={styles.restaurant}>
             <div className={styles.header}>{restaurant.name ?? 'Unnamed'}</div>
-            <DishList dishIds={restaurant.menu}/>
-            {restaurant?.reviews?.length > 0 && <ReviewList reviewIds={restaurant.reviews}/>}
-            <ReviewForm/>
+            <div className={styles.buttonRow}>
+                <ThemeNavLink to={'/restaurants/' + restaurantId + '/' + RestaurantPartList.MENU}>
+                    Menu
+                </ThemeNavLink>
+                <ThemeNavLink to={'/restaurants/' + restaurantId + '/' + RestaurantPartList.REVIEWS}>
+                    Reviews
+                </ThemeNavLink>
+            </div>
+            <Outlet/>
         </div>
     )
 }
 
-Restaurant.propTypes = {
-    id: PropTypes.string.isRequired,
-}
+Restaurant.propTypes = {}
 export default Restaurant;

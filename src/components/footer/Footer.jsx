@@ -1,6 +1,8 @@
+import styles from "./styles.module.css";
+
 const Footer = () => {
     return (
-        <footer>Very useful footer</footer>
+        <footer className={styles.footer}>Very useful footer</footer>
     );
 };
 

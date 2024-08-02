@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { selectReviewById } from "../../redux/review/reviewSlice.js";
 import styles from "./styles.module.css";
-import { selectUserById } from "../../redux/user/userSlice.js";
+import { selectReviewById } from "../../redux/entities/review/reviewSlice.js";
+import { selectUserById } from "../../redux/entities/user/userSlice.js";
 
 export const Review = ({id}) => {
     const review = useSelector(state => selectReviewById(state, id));

@@ -1,13 +1,17 @@
 import Review from "../review/Review";
-import PropTypes from "prop-types";
 import Caption from "../caption/Caption.jsx";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectRestaurantById } from "../../redux/entities/restaurant/restaurantSlice.js";
 
-const ReviewList = ({reviewIds}) => {
+const ReviewList = () => {
+    const {restaurantId} = useParams();
+    const restaurant = useSelector(state => selectRestaurantById(state, restaurantId)) || {};
     return (
         <div>
             <Caption>Reviews</Caption>
             <ul className={"review-list"}>
-                {reviewIds.map(reviewId => {
+                {restaurant.reviews.map(reviewId => {
                     return <Review key={reviewId} id={reviewId}/>
                 })}
             </ul>
@@ -16,6 +20,5 @@ const ReviewList = ({reviewIds}) => {
 }
 
 ReviewList.propTypes = {
-    reviewIds: PropTypes.array,
 }
 export default ReviewList;
