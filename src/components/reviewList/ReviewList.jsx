@@ -23,7 +23,7 @@ const ReviewList = () => {
     return (
         <div>
             <Caption>Reviews</Caption>
-            <div className={"review-list"}>
+            <div>
                 {reviews.map(review => {
                     return <Review key={review.id} review={review}/>
                 })}
