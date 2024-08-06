@@ -6,26 +6,27 @@ import { RestaurantPartList } from "./RestaurantPartList.js";
 import { selectRestaurantById } from "../../redux/entities/restaurant/restaurantSlice.js";
 import ThemeNavLink from "../themeNavLink/ThemeNavLink.jsx";
 import { useRequest } from "../../hooks/useRequest.js";
-import { RequestStatuses } from "../../helpers/requestStatuses.js";
 import { getRestaurantById } from "../../redux/entities/restaurant/getRestaurantById.js";
+import Loading from "../loading/Loading.jsx";
+import Error from "../error/Error.jsx";
 
 const Restaurant = () => {
     const {restaurantId} = useParams();
     const restaurant = useSelector(state => selectRestaurantById(state, restaurantId));
     const navigate = useNavigate();
 
-    const requestStatus = useRequest(getRestaurantById, restaurantId);
+    const [isLoading, isError] = useRequest(getRestaurantById, restaurantId);
 
     useEffect(() => {
         navigate("menu", {replace: true});
     }, [navigate, restaurantId]);
 
-    if (requestStatus === RequestStatuses.PENDING) {
-        return <div>...loading</div>;
+    if (isLoading()) {
+        return <Loading/>;
     }
 
-    if (requestStatus === RequestStatuses.REJECTED) {
-        return <div>error</div>;
+    if (isError()) {
+        return <Error/>;
     }
 
     if (!restaurant?.menu?.length) {

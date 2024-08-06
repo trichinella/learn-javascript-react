@@ -6,18 +6,19 @@ import styles from "./styles.module.css";
 import ThemeNavLink from "../themeNavLink/ThemeNavLink.jsx";
 import { getRestaurants } from "../../redux/entities/restaurant/getRestaurants.js";
 import { useRequest } from "../../hooks/useRequest.js";
-import { RequestStatuses } from "../../helpers/requestStatuses.js";
+import Loading from "../loading/Loading.jsx";
+import Error from "../error/Error.jsx";
 
 const RestaurantList = () => {
     const ids = useSelector(selectRestaurantIds);
-    const requestStatus = useRequest(getRestaurants);
+    const [isLoading, isError] = useRequest(getRestaurants);
 
-    if (requestStatus === RequestStatuses.PENDING) {
-        return <div>...loading</div>;
+    if (isLoading()) {
+        return <Loading/>;
     }
 
-    if (requestStatus === RequestStatuses.REJECTED) {
-        return <div>error</div>;
+    if (isError()) {
+        return <Error/>;
     }
 
     if (!ids.length) {

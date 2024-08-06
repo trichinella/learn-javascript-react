@@ -1,30 +1,32 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit'
+import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit'
 import { getReviewsByRestaurant } from "./getReviewsByRestaurant.js";
 
-const initialState = {
-    entitiesByRestaurants: {},
-};
+const entityAdapter = createEntityAdapter();
 
 export const reviewSlice = createSlice({
     name: 'review',
-    initialState,
+    initialState: {
+        ...entityAdapter.getInitialState(),
+        restaurants: {},
+    },
     extraReducers: (builder) => {
         builder.addCase(getReviewsByRestaurant.fulfilled, (state, {payload, meta}) => {
-            state.entitiesByRestaurants[meta.arg] = payload;
+            entityAdapter.setMany(state, payload);
+            state.restaurants[meta.arg] = true;
         })
     },
     selectors: {
         selectReviewState: (state) => state,
+        hasReviewsByRestaurantId: (state, restaurantId) => !!state.restaurants[restaurantId],
     },
 })
 
-export const {selectReviewState} = reviewSlice.selectors
-
+export const {selectReviewState, hasReviewsByRestaurantId} = reviewSlice.selectors
 
 export const selectReviewsByRestaurantId = createSelector([
     selectReviewState,
-    (state, restaurantId) => restaurantId
-], (state, restaurantId) => {
-    return state.entitiesByRestaurants[restaurantId] ?? [];
+    (state, ids) => ids
+], (state, ids) => {
+    return ids.map(id => state.entities[id]).filter(entity => !!entity);
 });
 

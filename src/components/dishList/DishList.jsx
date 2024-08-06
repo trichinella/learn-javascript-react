@@ -4,21 +4,24 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DishPreview from "../dishPreview/DishPreview.jsx";
 import { useRequest } from "../../hooks/useRequest.js";
-import { RequestStatuses } from "../../helpers/requestStatuses.js";
-import { selectDishesByRestaurantId } from "../../redux/entities/dish/dishSlice.js";
 import { getDishesByRestaurant } from "../../redux/entities/dish/getDishesByRestaurant.js";
+import { selectDishesByIds } from "../../redux/entities/dish/dishSlice.js";
+import { selectRestaurantById } from "../../redux/entities/restaurant/restaurantSlice.js";
+import Loading from "../loading/Loading.jsx";
+import Error from "../error/Error.jsx";
 
 const DishList = () => {
     const {restaurantId} = useParams();
-    const dishes = useSelector(state => selectDishesByRestaurantId(state, restaurantId));
-    const requestStatus = useRequest(getDishesByRestaurant, restaurantId);
+    const [isLoading, isError] = useRequest(getDishesByRestaurant, restaurantId);
+    const restaurant = useSelector(state => selectRestaurantById(state, restaurantId));
+    const dishes = useSelector(state => selectDishesByIds(state, restaurant.menu));
 
-    if (requestStatus === RequestStatuses.PENDING) {
-        return <div>...loading</div>;
+    if (isLoading()) {
+        return <Loading/>;
     }
 
-    if (requestStatus === RequestStatuses.REJECTED) {
-        return <div>error</div>;
+    if (isError()) {
+        return <Error/>;
     }
 
     return (
@@ -33,6 +36,5 @@ const DishList = () => {
     )
 }
 
-DishList.propTypes = {
-}
+DishList.propTypes = {}
 export default DishList;

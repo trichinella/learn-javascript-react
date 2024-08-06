@@ -3,21 +3,26 @@ import Caption from "../caption/Caption.jsx";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useRequest } from "../../hooks/useRequest.js";
-import { RequestStatuses } from "../../helpers/requestStatuses.js";
 import { selectReviewsByRestaurantId } from "../../redux/entities/review/reviewSlice.js";
 import { getReviewsByRestaurant } from "../../redux/entities/review/getReviewsByRestaurant.js";
+import { getUsers } from "../../redux/entities/user/getUsers.js";
+import { selectRestaurantById } from "../../redux/entities/restaurant/restaurantSlice.js";
+import Loading from "../loading/Loading.jsx";
+import Error from "../error/Error.jsx";
 
 const ReviewList = () => {
     const {restaurantId} = useParams();
-    const reviews = useSelector(state => selectReviewsByRestaurantId(state, restaurantId));
-    const requestStatus = useRequest(getReviewsByRestaurant, restaurantId);
+    const restaurant = useSelector(state => selectRestaurantById(state, restaurantId));
+    const reviews = useSelector(state => selectReviewsByRestaurantId(state, restaurant.reviews));
+    const [isReviewLoading, isReviewError] = useRequest(getReviewsByRestaurant, restaurantId);
+    const [isUserLoading, isUserError] = useRequest(getUsers);
 
-    if (requestStatus === RequestStatuses.PENDING) {
-        return <div>...loading</div>;
+    if (isReviewError() || isUserError()) {
+        return <Error/>;
     }
 
-    if (requestStatus === RequestStatuses.REJECTED) {
-        return <div>error</div>;
+    if (isReviewLoading() || isUserLoading()) {
+        return <Loading/>;
     }
 
     return (

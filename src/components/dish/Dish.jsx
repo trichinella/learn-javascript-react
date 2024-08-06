@@ -5,22 +5,22 @@ import DishCartSection from "../dishCartSection/DishCartSection.jsx";
 import styles from "./styles.module.css";
 import { selectDishById } from "../../redux/entities/dish/dishSlice.js";
 import { useRequest } from "../../hooks/useRequest.js";
-import { RequestStatuses } from "../../helpers/requestStatuses.js";
 import { getDishById } from "../../redux/entities/dish/getDishById.js";
+import Loading from "../loading/Loading.jsx";
+import Error from "../error/Error.jsx";
 
 const Dish = () => {
     const {dishId} = useParams();
     const dish = useSelector(state => selectDishById(state, dishId));
     const {user} = useUserContext();
-    const requestStatus = useRequest(getDishById, dishId);
+    const [isLoading, isError] = useRequest(getDishById, dishId);
 
-    //выглядит конструкция не очень - как сделать корректно?
-    if (requestStatus === RequestStatuses.PENDING || (!dish && requestStatus === RequestStatuses.IDLE)) {
-        return <div>...loading</div>;
+    if (isLoading()) {
+        return <Loading/>;
     }
 
-    if (requestStatus === RequestStatuses.REJECTED) {
-        return <div>error</div>;
+    if (isError()) {
+        return <Error/>;
     }
 
     return (

@@ -25,7 +25,9 @@ export const requestSlice = createSlice({
                 }
             ),
     selectors: {
-        selectRequestStatus: (state, requestId) => state[requestId] || RequestStatuses.IDLE,
+        selectRequestStatus: (state, requestId) => {
+            return state[requestId]  || RequestStatuses.IDLE;
+        },
     },
 });
 
