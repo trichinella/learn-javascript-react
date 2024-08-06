@@ -11,13 +11,13 @@ import Error from "../error/Error.jsx";
 
 const RestaurantList = () => {
     const ids = useSelector(selectRestaurantIds);
-    const [isLoading, isError] = useRequest(getRestaurants);
+    const {requestLoading, requestError}  = useRequest(getRestaurants);
 
-    if (isLoading()) {
+    if (requestLoading) {
         return <Loading/>;
     }
 
-    if (isError()) {
+    if (requestError) {
         return <Error/>;
     }
 

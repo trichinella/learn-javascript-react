@@ -15,17 +15,17 @@ const Restaurant = () => {
     const restaurant = useSelector(state => selectRestaurantById(state, restaurantId));
     const navigate = useNavigate();
 
-    const [isLoading, isError] = useRequest(getRestaurantById, restaurantId);
+    const {requestLoading, requestError} = useRequest(getRestaurantById, restaurantId);
 
     useEffect(() => {
         navigate("menu", {replace: true});
     }, [navigate, restaurantId]);
 
-    if (isLoading()) {
+    if (requestLoading) {
         return <Loading/>;
     }
 
-    if (isError()) {
+    if (requestError) {
         return <Error/>;
     }
 

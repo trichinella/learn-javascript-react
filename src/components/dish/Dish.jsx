@@ -13,13 +13,13 @@ const Dish = () => {
     const {dishId} = useParams();
     const dish = useSelector(state => selectDishById(state, dishId));
     const {user} = useUserContext();
-    const [isLoading, isError] = useRequest(getDishById, dishId);
+    const {requestLoading, requestError} = useRequest(getDishById, dishId);
 
-    if (isLoading()) {
+    if (requestLoading) {
         return <Loading/>;
     }
 
-    if (isError()) {
+    if (requestError) {
         return <Error/>;
     }
 
@@ -27,7 +27,7 @@ const Dish = () => {
         <div className={styles.dish}>
             <div className={styles.dishHeader}>{dish.name}</div>
             <div>Ingredients: {dish.ingredients.join(', ')}</div>
-            {user && <DishCartSection id={dishId} />}
+            {user && <DishCartSection id={dishId}/>}
         </div>
     )
 }

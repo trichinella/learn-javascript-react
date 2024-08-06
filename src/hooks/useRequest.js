@@ -36,17 +36,13 @@ export const useRequest = (thunk, ...params) => {
         };
     }, [dispatch, ...params, thunk]);
 
-    const isLoading = () => {
-        return status === RequestStatuses.IDLE || status === RequestStatuses.PENDING;
-    };
+    const requestLoading = status === RequestStatuses.IDLE || status === RequestStatuses.PENDING;
+    const requestError = status === RequestStatuses.REJECTED;
+    const requestSuccess = status === RequestStatuses.FULFILLED;
 
-    const isError = () => {
-        return status === RequestStatuses.REJECTED;
+    return {
+        requestLoading,
+        requestError,
+        requestSuccess
     };
-
-    const isSuccess = () => {
-        return status === RequestStatuses.FULFILLED;
-    };
-
-    return [isLoading, isError, isSuccess];
 };

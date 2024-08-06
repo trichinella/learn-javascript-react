@@ -14,15 +14,21 @@ const ReviewList = () => {
     const {restaurantId} = useParams();
     const restaurant = useSelector(state => selectRestaurantById(state, restaurantId));
     const reviews = useSelector(state => selectReviewsByRestaurantId(state, restaurant.reviews));
-    const [isReviewLoading, isReviewError] = useRequest(getReviewsByRestaurant, restaurantId);
-    const [isUserLoading, isUserError] = useRequest(getUsers);
+    const {
+        requestLoading: reviewRequestLoading,
+        requestError: reviewRequestError
+    } = useRequest(getReviewsByRestaurant, restaurantId);
+    const {
+        requestLoading: userRequestLoading,
+        requestError: userRequestError
+    } = useRequest(getUsers);
 
-    if (isReviewError() || isUserError()) {
-        return <Error/>;
+    if (reviewRequestLoading && userRequestLoading) {
+        return <Loading/>;
     }
 
-    if (isReviewLoading() || isUserLoading()) {
-        return <Loading/>;
+    if (reviewRequestError && userRequestError) {
+        return <Error/>;
     }
 
     return (
@@ -37,6 +43,5 @@ const ReviewList = () => {
     )
 }
 
-ReviewList.propTypes = {
-}
+ReviewList.propTypes = {}
 export default ReviewList;

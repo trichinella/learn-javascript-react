@@ -12,15 +12,15 @@ import Error from "../error/Error.jsx";
 
 const DishList = () => {
     const {restaurantId} = useParams();
-    const [isLoading, isError] = useRequest(getDishesByRestaurant, restaurantId);
+    const {requestLoading, requestError}  = useRequest(getDishesByRestaurant, restaurantId);
     const restaurant = useSelector(state => selectRestaurantById(state, restaurantId));
     const dishes = useSelector(state => selectDishesByIds(state, restaurant.menu));
 
-    if (isLoading()) {
+    if (requestLoading) {
         return <Loading/>;
     }
 
-    if (isError()) {
+    if (requestError) {
         return <Error/>;
     }
 
