@@ -9,6 +9,7 @@ import { useRequest } from "../../hooks/useRequest.js";
 import { getRestaurantById } from "../../redux/entities/restaurant/getRestaurantById.js";
 import Loading from "../loading/Loading.jsx";
 import Error from "../error/Error.jsx";
+import { ReviewForm } from "../reviewForm/ReviewForm.jsx";
 
 const Restaurant = () => {
     const {restaurantId} = useParams();
@@ -45,6 +46,7 @@ const Restaurant = () => {
                 </ThemeNavLink>
             </div>
             <Outlet/>
+            <ReviewForm/>
         </div>
     )
 }

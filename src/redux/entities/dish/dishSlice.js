@@ -6,14 +6,10 @@ const entityAdapter = createEntityAdapter();
 
 export const dishSlice = createSlice({
     name: 'dish',
-    initialState: {
-        ...entityAdapter.getInitialState(),
-        restaurants: {},
-    },
+    initialState: entityAdapter.getInitialState(),
     extraReducers: (builder) => {
-        builder.addCase(getDishesByRestaurant.fulfilled, (state, {payload, meta}) => {
+        builder.addCase(getDishesByRestaurant.fulfilled, (state, {payload}) => {
             entityAdapter.setMany(state, payload);
-            state.restaurants[meta.arg] = true;
         })
         builder.addCase(getDishById.fulfilled, (state, {payload}) => {
             entityAdapter.setOne(state, payload);
@@ -22,11 +18,10 @@ export const dishSlice = createSlice({
     selectors: {
         selectDishState: (state) => state,
         selectDishById: (state, id) => state.entities[id],
-        hasDishesByRestaurantId: (state, restaurantId) => !!state.restaurants[restaurantId],
     },
 });
 
-export const {selectDishById, selectDishState,hasDishesByRestaurantId} = dishSlice.selectors
+export const {selectDishById, selectDishState} = dishSlice.selectors
 
 export const selectDishesByIds = createSelector([
     selectDishState,

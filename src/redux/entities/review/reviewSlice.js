@@ -5,23 +5,18 @@ const entityAdapter = createEntityAdapter();
 
 export const reviewSlice = createSlice({
     name: 'review',
-    initialState: {
-        ...entityAdapter.getInitialState(),
-        restaurants: {},
-    },
+    initialState: entityAdapter.getInitialState(),
     extraReducers: (builder) => {
-        builder.addCase(getReviewsByRestaurant.fulfilled, (state, {payload, meta}) => {
+        builder.addCase(getReviewsByRestaurant.fulfilled, (state, {payload}) => {
             entityAdapter.setMany(state, payload);
-            state.restaurants[meta.arg] = true;
         })
     },
     selectors: {
         selectReviewState: (state) => state,
-        hasReviewsByRestaurantId: (state, restaurantId) => !!state.restaurants[restaurantId],
     },
 })
 
-export const {selectReviewState, hasReviewsByRestaurantId} = reviewSlice.selectors
+export const {selectReviewState} = reviewSlice.selectors
 
 export const selectReviewsByRestaurantId = createSelector([
     selectReviewState,
