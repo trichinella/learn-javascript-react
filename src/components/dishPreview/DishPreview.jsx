@@ -1,12 +1,8 @@
 import PropTypes from 'prop-types';
-import { useSelector } from "react-redux";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
-import { selectDishById } from "../../redux/entities/dish/dishSlice.js";
 
-const DishPreview = ({id}) => {
-    const dish = useSelector(state => selectDishById(state, id));
-
+const DishPreview = ({dish}) => {
     return (
         <div className={styles.preview}>
             <Link to={`/dish/${dish.id}`}>{dish.name}</Link>
@@ -15,7 +11,7 @@ const DishPreview = ({id}) => {
 };
 
 DishPreview.propTypes = {
-    id: PropTypes.string,
+    dish: PropTypes.object,
 };
 
 export default DishPreview;

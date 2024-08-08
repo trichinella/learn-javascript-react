@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from "react-redux";
 import { selectDishById } from "../../redux/entities/dish/dishSlice.js";
 
+
 const CartItem = ({dishId, amount}) => {
     const dish = useSelector(state => selectDishById(state, dishId)) || {};
 

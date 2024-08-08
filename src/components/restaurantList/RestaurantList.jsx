@@ -4,9 +4,26 @@ import { Outlet } from "react-router-dom";
 import { selectRestaurantIds } from "../../redux/entities/restaurant/restaurantSlice.js";
 import styles from "./styles.module.css";
 import ThemeNavLink from "../themeNavLink/ThemeNavLink.jsx";
+import { getRestaurants } from "../../redux/entities/restaurant/getRestaurants.js";
+import { useRequest } from "../../hooks/useRequest.js";
+import Loading from "../loading/Loading.jsx";
+import Error from "../error/Error.jsx";
 
 const RestaurantList = () => {
     const ids = useSelector(selectRestaurantIds);
+    const {requestLoading, requestError}  = useRequest(getRestaurants);
+
+    if (requestLoading) {
+        return <Loading/>;
+    }
+
+    if (requestError) {
+        return <Error/>;
+    }
+
+    if (!ids.length) {
+        return null;
+    }
 
     return (
         <>

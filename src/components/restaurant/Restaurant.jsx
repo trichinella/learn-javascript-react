@@ -5,15 +5,30 @@ import { useEffect } from "react";
 import { RestaurantPartList } from "./RestaurantPartList.js";
 import { selectRestaurantById } from "../../redux/entities/restaurant/restaurantSlice.js";
 import ThemeNavLink from "../themeNavLink/ThemeNavLink.jsx";
+import { useRequest } from "../../hooks/useRequest.js";
+import { getRestaurantById } from "../../redux/entities/restaurant/getRestaurantById.js";
+import Loading from "../loading/Loading.jsx";
+import Error from "../error/Error.jsx";
+import { ReviewForm } from "../reviewForm/ReviewForm.jsx";
 
 const Restaurant = () => {
     const {restaurantId} = useParams();
-    const restaurant = useSelector(state => selectRestaurantById(state, restaurantId)) || {};
+    const restaurant = useSelector(state => selectRestaurantById(state, restaurantId));
     const navigate = useNavigate();
 
+    const {requestLoading, requestError} = useRequest(getRestaurantById, restaurantId);
+
     useEffect(() => {
-        navigate("menu", { replace: true });
+        navigate("menu", {replace: true});
     }, [navigate, restaurantId]);
+
+    if (requestLoading) {
+        return <Loading/>;
+    }
+
+    if (requestError) {
+        return <Error/>;
+    }
 
     if (!restaurant?.menu?.length) {
         return null;
@@ -31,6 +46,7 @@ const Restaurant = () => {
                 </ThemeNavLink>
             </div>
             <Outlet/>
+            <ReviewForm/>
         </div>
     )
 }
