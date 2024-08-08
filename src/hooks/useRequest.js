@@ -18,9 +18,9 @@ export const useRequest = (thunk, ...params) => {
     //Лайфхак, когда запрос не нужен, то он остается idle, а данные уже есть
     //Промис уже есть - смотрим у него статус - и ставим fulfilled
     useEffect(() => {
-        const t = {};
-        Promise.race([request, t])
-            .then(v => (v === t) ? RequestStatuses.PENDING : RequestStatuses.FULFILLED, () => RequestStatuses.REJECTED).then((value) => {
+        const nullPromise = {};
+        Promise.race([request, nullPromise])
+            .then(promiseState => (promiseState === nullPromise) ? RequestStatuses.PENDING : RequestStatuses.FULFILLED, () => RequestStatuses.REJECTED).then((value) => {
             if (request && value === RequestStatuses.FULFILLED && selectorStatus === RequestStatuses.IDLE) {
                 setStatus(RequestStatuses.FULFILLED);
             }

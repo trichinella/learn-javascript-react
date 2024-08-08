@@ -23,11 +23,11 @@ const ReviewList = () => {
         requestError: userRequestError
     } = useRequest(getUsers);
 
-    if (reviewRequestLoading && userRequestLoading) {
+    if (reviewRequestLoading || userRequestLoading) {
         return <Loading/>;
     }
 
-    if (reviewRequestError && userRequestError) {
+    if (reviewRequestError || userRequestError) {
         return <Error/>;
     }
 

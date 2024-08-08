@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import Counter from "../counter/Counter.jsx";
 import styles from "./styles.module.css";
 import Button from "../button/Button.jsx";
+import { useUserContext } from "../userProvider/UserProvider.jsx";
 
 const INITIAL_VALUES = () => {
     return {
@@ -36,7 +37,12 @@ const reducer = (state, action) => {
 
 export const ReviewForm = () => {
     const [state, dispatch] = useReducer(reducer, INITIAL_VALUES());
+    const {user} = useUserContext();
 
+    if (!user) {
+        return null;
+    }
+    
     return (<form className={styles.reviewForm}>
         <label className={styles.reviewFormLabel}>
             Name
