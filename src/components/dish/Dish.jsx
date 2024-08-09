@@ -1,25 +1,21 @@
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useUserContext } from "../userProvider/UserProvider.jsx";
 import DishCartSection from "../dishCartSection/DishCartSection.jsx";
 import styles from "./styles.module.css";
-import { selectDishById } from "../../redux/entities/dish/dishSlice.js";
-import { useRequest } from "../../hooks/useRequest.js";
-import { getDishById } from "../../redux/entities/dish/getDishById.js";
 import Loading from "../loading/Loading.jsx";
 import Error from "../error/Error.jsx";
+import { useGetDishByIdQuery } from "../../redux/services/apiSlice.js";
 
 const Dish = () => {
     const {dishId} = useParams();
-    const dish = useSelector(state => selectDishById(state, dishId));
+    const {isLoading, isError, data: dish} = useGetDishByIdQuery({dishId});
     const {user} = useUserContext();
-    const {requestLoading, requestError} = useRequest(getDishById, dishId);
 
-    if (requestLoading) {
+    if (isLoading) {
         return <Loading/>;
     }
 
-    if (requestError) {
+    if (isError) {
         return <Error/>;
     }
 

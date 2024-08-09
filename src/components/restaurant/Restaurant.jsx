@@ -1,34 +1,27 @@
-import { useSelector } from "react-redux";
 import styles from "./styles.module.css";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { RestaurantPartList } from "./RestaurantPartList.js";
-import { selectRestaurantById } from "../../redux/entities/restaurant/restaurantSlice.js";
 import ThemeNavLink from "../themeNavLink/ThemeNavLink.jsx";
-import { useRequest } from "../../hooks/useRequest.js";
-import { getRestaurantById } from "../../redux/entities/restaurant/getRestaurantById.js";
-import Loading from "../loading/Loading.jsx";
-import Error from "../error/Error.jsx";
-import { ReviewForm } from "../reviewForm/ReviewForm.jsx";
+import { useGetRestaurantsQuery } from "../../redux/services/apiSlice.js";
 
 const Restaurant = () => {
     const {restaurantId} = useParams();
-    const restaurant = useSelector(state => selectRestaurantById(state, restaurantId));
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const {requestLoading, requestError} = useRequest(getRestaurantById, restaurantId);
+    const {data: restaurant} = useGetRestaurantsQuery(undefined, {
+        selectFromResult: ({data, ...rest}) => ({
+            ...rest,
+            data: data?.find((entity) => entity.id === restaurantId),
+        }),
+    });
 
     useEffect(() => {
-        navigate("menu", {replace: true});
-    }, [navigate, restaurantId]);
-
-    if (requestLoading) {
-        return <Loading/>;
-    }
-
-    if (requestError) {
-        return <Error/>;
-    }
+        if (!(location.pathname.includes(RestaurantPartList.REVIEWS) || location.pathname.includes(RestaurantPartList.MENU))) {
+            navigate("menu", {replace: true});
+        }
+    }, [navigate, restaurantId, location]);
 
     if (!restaurant?.menu?.length) {
         return null;
@@ -46,7 +39,6 @@ const Restaurant = () => {
                 </ThemeNavLink>
             </div>
             <Outlet/>
-            <ReviewForm/>
         </div>
     )
 }
