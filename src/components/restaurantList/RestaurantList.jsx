@@ -1,36 +1,32 @@
-import { useSelector } from "react-redux";
 import RestaurantLabel from "../restaurant/RestaurantLabel.jsx";
 import { Outlet } from "react-router-dom";
-import { selectRestaurantIds } from "../../redux/entities/restaurant/restaurantSlice.js";
 import styles from "./styles.module.css";
 import ThemeNavLink from "../themeNavLink/ThemeNavLink.jsx";
-import { getRestaurants } from "../../redux/entities/restaurant/getRestaurants.js";
-import { useRequest } from "../../hooks/useRequest.js";
 import Loading from "../loading/Loading.jsx";
 import Error from "../error/Error.jsx";
+import { useGetRestaurantsQuery } from "../../redux/services/apiSlice.js";
 
 const RestaurantList = () => {
-    const ids = useSelector(selectRestaurantIds);
-    const {requestLoading, requestError}  = useRequest(getRestaurants);
+    const { isLoading, isError, data: restaurants } = useGetRestaurantsQuery();
 
-    if (requestLoading) {
+    if (isLoading) {
         return <Loading/>;
     }
 
-    if (requestError) {
+    if (isError) {
         return <Error/>;
     }
 
-    if (!ids.length) {
+    if (!restaurants.length) {
         return null;
     }
 
     return (
         <>
             <div className={styles.buttonRow}>
-                {ids.map(id => {
-                    return <ThemeNavLink to={'/restaurants/' + id} key={'button-' + id}>
-                        <RestaurantLabel id={id}/>
+                {restaurants.map(restaurant => {
+                    return <ThemeNavLink to={'/restaurants/' + restaurant.id} key={'button-' + restaurant.id}>
+                        <RestaurantLabel name={restaurant.name}/>
                     </ThemeNavLink>
                 })}
             </div>

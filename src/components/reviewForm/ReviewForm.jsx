@@ -1,21 +1,19 @@
-import { useReducer } from "react";
+import { useCallback, useReducer } from "react";
 import Counter from "../counter/Counter.jsx";
 import styles from "./styles.module.css";
 import Button from "../button/Button.jsx";
 import { useUserContext } from "../userProvider/UserProvider.jsx";
+import { useAddReviewMutation } from "../../redux/services/apiSlice.js";
+import { useParams } from "react-router-dom";
 
 const INITIAL_VALUES = () => {
     return {
-        name: '', text: '', rating: 0,
+        text: '', rating: 0,
     };
 };
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'name':
-            return {
-                ...state, name: action.payload,
-            };
         case 'text':
             return {
                 ...state, text: action.payload,
@@ -36,24 +34,21 @@ const reducer = (state, action) => {
 };
 
 export const ReviewForm = () => {
+    const {restaurantId} = useParams();
+
     const [state, dispatch] = useReducer(reducer, INITIAL_VALUES());
     const {user} = useUserContext();
+    const [addReview, {isLoading}] = useAddReviewMutation();
+    const handleAddReview = useCallback(() => {
+        addReview({restaurantId, review: {...state, userId: user.id}});
+        dispatch({type: 'reset'});
+    }, [addReview, state, user?.id, restaurantId]);
 
     if (!user) {
         return null;
     }
-    
+
     return (<form className={styles.reviewForm}>
-        <label className={styles.reviewFormLabel}>
-            Name
-        </label>
-        <input
-            type={"text"}
-            className={styles.formInput}
-            name={"name"}
-            value={state.name}
-            onChange={event => dispatch({type: 'name', payload: event.target.value})}
-        />
         <label className={styles.reviewFormLabel}>
             Text
         </label>
@@ -73,6 +68,7 @@ export const ReviewForm = () => {
             decrement={() => dispatch({type: 'decrementRating'})}
             increment={() => dispatch({type: 'incrementRating'})}
         />
-        <Button onClick={() => dispatch({type: 'reset'})}>Save</Button>
+        <Button onClick={() => dispatch({type: 'reset'})}>Clear</Button>
+        <Button disabled={isLoading} onClick={handleAddReview}>Save</Button>
     </form>)
 }

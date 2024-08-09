@@ -1,10 +1,19 @@
 import PropTypes from 'prop-types';
-import { useSelector } from "react-redux";
-import { selectDishById } from "../../redux/entities/dish/dishSlice.js";
+import { useGetDishByIdQuery } from "../../redux/services/apiSlice.js";
+import Loading from "../loading/Loading.jsx";
+import Error from "../error/Error.jsx";
 
 
 const CartItem = ({dishId, amount}) => {
-    const dish = useSelector(state => selectDishById(state, dishId)) || {};
+    const {isLoading, isError, data: dish} = useGetDishByIdQuery({dishId});
+
+    if (isLoading) {
+        return <Loading/>;
+    }
+
+    if (isError) {
+        return <Error/>;
+    }
 
     return (
         <>
