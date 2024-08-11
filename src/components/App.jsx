@@ -6,14 +6,16 @@ import { store } from "../redux/store.js";
 import { RouterProvider } from "react-router-dom";
 import { router } from "../helpers/routing/baseRouter.jsx";
 
-export const App = () => {
+const App = () => {
     return (
         <Provider store={store}>
             <ThemeProvider>
                 <UserProvider>
-                    <RouterProvider router={router} />
+                    <RouterProvider router={router}/>
                 </UserProvider>
             </ThemeProvider>
         </Provider>
     )
 }
+
+export default App;
