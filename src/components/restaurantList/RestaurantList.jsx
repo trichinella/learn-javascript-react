@@ -1,40 +1,25 @@
-import RestaurantLabel from "../restaurant/RestaurantLabel.jsx";
-import { Outlet } from "react-router-dom";
+import { getRestaurants } from "../../api/get-restaurants.js";
 import styles from "./styles.module.css";
-import ThemeNavLink from "../themeNavLink/ThemeNavLink.jsx";
-import Loading from "../loading/Loading.jsx";
-import Error from "../error/Error.jsx";
-import { useGetRestaurantsQuery } from "../../redux/services/apiSlice.js";
+import RestaurantLabel from "../restaurant/RestaurantLabel.jsx";
+import NavBarItem from "../navBarItem/NavBarItem.jsx";
+import PropTypes from "prop-types";
 
-const RestaurantList = () => {
-    const { isLoading, isError, data: restaurants } = useGetRestaurantsQuery();
+const RestaurantList = async ({activeId}) => {
+    const restaurants = await getRestaurants();
 
-    if (isLoading) {
-        return <Loading/>;
-    }
-
-    if (isError) {
-        return <Error/>;
-    }
-
-    if (!restaurants.length) {
-        return null;
-    }
-
-    return (
-        <>
-            <div className={styles.buttonRow}>
-                {restaurants.map(restaurant => {
-                    return <ThemeNavLink to={'/restaurants/' + restaurant.id} key={'button-' + restaurant.id}>
-                        <RestaurantLabel name={restaurant.name}/>
-                    </ThemeNavLink>
-                })}
-            </div>
-            <Outlet/>
-        </>
-    );
+    return <div className={styles.buttonRow}>
+        {restaurants.map(restaurant => {
+            return <NavBarItem
+                active={activeId === restaurant.id}
+                path={'/restaurants/' + restaurant.id}
+                key={'button-' + restaurant.id}
+                label={<RestaurantLabel name={restaurant.name}/>}/>
+        })}
+    </div>
 };
 
-RestaurantList.propTypes = {};
+RestaurantList.propTypes = {
+    activeId: PropTypes.bool,
+};
 
 export default RestaurantList;

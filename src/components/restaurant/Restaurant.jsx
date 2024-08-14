@@ -1,47 +1,41 @@
+'use client'
+
 import styles from "./styles.module.css";
-import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import NavBarItem from "../navBarItem/NavBarItem.jsx";
 import { RestaurantPartList } from "./RestaurantPartList.js";
-import ThemeNavLink from "../themeNavLink/ThemeNavLink.jsx";
-import { useGetRestaurantsQuery } from "../../redux/services/apiSlice.js";
+import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { useEffect } from "react";
+import PropTypes from "prop-types";
 
-const Restaurant = () => {
-    const {restaurantId} = useParams();
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    const {data: restaurant} = useGetRestaurantsQuery(undefined, {
-        selectFromResult: ({data, ...rest}) => ({
-            ...rest,
-            data: data?.find((entity) => entity.id === restaurantId),
-        }),
-    });
+const Restaurant = ({id, name}) => {
+    const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
-        if (!(location.pathname.includes(RestaurantPartList.REVIEWS) || location.pathname.includes(RestaurantPartList.MENU))) {
-            navigate("menu", {replace: true});
+        if (!(pathname.endsWith(RestaurantPartList.MENU) || pathname.endsWith(RestaurantPartList.REVIEWS))) {
+            router.replace('/restaurants/' + id + '/' + RestaurantPartList.MENU)
         }
-    }, [navigate, restaurantId, location]);
+    }, [id, router, pathname]);
 
-    if (!restaurant?.menu?.length) {
-        return null;
-    }
 
     return (
-        <div className={styles.restaurant}>
-            <div className={styles.header}>{restaurant.name ?? 'Unnamed'}</div>
-            <div className={styles.buttonRow}>
-                <ThemeNavLink to={'/restaurants/' + restaurantId + '/' + RestaurantPartList.MENU}>
-                    Menu
-                </ThemeNavLink>
-                <ThemeNavLink to={'/restaurants/' + restaurantId + '/' + RestaurantPartList.REVIEWS}>
-                    Reviews
-                </ThemeNavLink>
+        <>
+            <div className={styles.restaurant}>
+                <div className={styles.header}>{name ?? 'Unnamed'}</div>
+                <div className={styles.buttonRow}>
+                    <NavBarItem label={'Menu'} path={'/restaurants/' + id + '/' + RestaurantPartList.MENU}
+                                active={pathname.endsWith(RestaurantPartList.MENU)}/>
+                    <NavBarItem label={'Reviews'} path={'/restaurants/' + id + '/' + RestaurantPartList.REVIEWS}
+                                active={pathname.endsWith(RestaurantPartList.REVIEWS)}/>
+                </div>
             </div>
-            <Outlet/>
-        </div>
-    )
+        </>
+    );
 }
 
-Restaurant.propTypes = {}
+Restaurant.propTypes = {
+    id: PropTypes.string,
+    name: PropTypes.string,
+}
 export default Restaurant;
