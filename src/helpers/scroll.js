@@ -1,3 +1,5 @@
+'use client'
+
 export const getScrollPercentage = () => {
     if (!document.body.scrollHeight || !window.scrollY) {
         return 0;

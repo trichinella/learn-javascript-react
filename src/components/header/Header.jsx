@@ -1,6 +1,4 @@
-import Auth from "../auth/Auth.jsx";
 import styles from "./styles.module.css";
-import ToggleButton from "../toggleButton/ToggleButton.jsx";
 import NavBar from "../navBar/NavBar.jsx";
 
 const Header = () => {
@@ -10,8 +8,6 @@ const Header = () => {
                 <div className={styles.mainPanel}>
                     <NavBar/>
                 </div>
-                <ToggleButton/>
-                <Auth/>
             </div>
         </header>
     );
